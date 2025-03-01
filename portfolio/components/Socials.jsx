@@ -7,7 +7,8 @@ import {
   FaFacebook,
   FaInstagram,
 } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaXTwitter, FaDiscord } from "react-icons/fa6";
+import { SiZalo } from "react-icons/si";
 
 const socials = [
   {
@@ -31,13 +32,13 @@ const socials = [
     path: "",
   },
   {
-    name: "Instagram",
-    icon: <FaInstagram />,
+    name: "Discord",
+    icon: <FaDiscord />,
     path: "",
   },
   {
-    name: "Facebook",
-    icon: <FaFacebook />,
+    name: "Zalo",
+    icon: <SiZalo />,
     path: "",
   },
 ];
