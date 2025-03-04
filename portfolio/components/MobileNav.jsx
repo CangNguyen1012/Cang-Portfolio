@@ -42,6 +42,8 @@ const MobileNav = () => {
             <h1 className="text-4xl font-semibold">
               Cang(Henry)<span className="text-accent">.</span>
             </h1>
+            <h2 className="text-xl">Web Developer</h2>
+            <h3 className="text-base">Portfolio</h3>
           </Link>
         </div>
         {/*nav links*/}
