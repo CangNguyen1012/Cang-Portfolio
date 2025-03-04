@@ -31,4 +31,7 @@
   .text-outline-hover {
     -webkit-text-stroke: 1px #6a0dad;
   }
+  html {
+    overflow-y: scroll;
+  }
 }

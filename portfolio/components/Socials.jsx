@@ -1,12 +1,6 @@
 import Link from "next/link";
 
-import {
-  FaGithub,
-  FaLinkedin,
-  FaYoutube,
-  FaFacebook,
-  FaInstagram,
-} from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter, FaDiscord } from "react-icons/fa6";
 import { SiZalo } from "react-icons/si";
 
@@ -27,19 +21,14 @@ const socials = [
     path: "",
   },
   {
-    name: "YouTube",
-    icon: <FaYoutube />,
-    path: "",
-  },
-  {
     name: "Discord",
     icon: <FaDiscord />,
-    path: "",
+    path: "https://discord.com/users/682561193856335872",
   },
   {
     name: "Zalo",
     icon: <SiZalo />,
-    path: "",
+    path: "https://zalo.me/0936408410",
   },
 ];
 
@@ -48,7 +37,13 @@ const Socials = ({ containerStyles, iconStyles }) => {
     <div className={containerStyles}>
       {socials.map((item, index) => {
         return (
-          <Link key={index} href={item.path} className={iconStyles}>
+          <Link
+            key={index}
+            href={item.path}
+            className={iconStyles}
+            target="_blank" //open in new tab
+            rel="noopener noreferrer" //Improve security and prevents the new tab from accessing the  page
+          >
             {item.icon}
           </Link>
         );

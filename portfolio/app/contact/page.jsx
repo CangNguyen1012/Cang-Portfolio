@@ -35,8 +35,73 @@ const info = [
 ];
 
 import { motion } from "framer-motion";
+import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  // Handle form input changes
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle service selection change
+  const handleServiceChange = (value) => {
+    setFormData({ ...formData, service: value });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(false);
+    setError("");
+
+    try {
+      const response = await emailjs.send(
+        "service_gjde6fg", // Replace with your EmailJS Service ID
+        "template_gtfz13p", // Replace with your EmailJS Template ID
+        {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message,
+        },
+        "w7qlA9pt5IJwLZFSb" // Replace with your EmailJS Public Key
+      );
+
+      if (response.status === 200) {
+        setSuccess(true);
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          service: "",
+          message: "",
+        });
+      }
+    } catch (error) {
+      setError("Failed to send message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -50,43 +115,94 @@ const Contact = () => {
         <div className="flex flex-col xl:flex-row gap-[30px]">
           {/* form */}
           <div className="xl:w-[54%] order-2 xl:order-none">
-            <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
+            >
               <h3 className="text-4xl text-accent">
                 Contact me if you need my help!
               </h3>
               <p className="text-white/60">
                 We can have a conversation and work together.
               </p>
-              {/* input */}
+
+              {/* Input Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input placeholder="First name" type="firstname" />
-                <Input placeholder="Last name" type="lastname" />
-                <Input placeholder="Email address" type="email" />
-                <Input placeholder="Phone number" type="phone" />
+                <Input
+                  placeholder="First name"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  placeholder="Last name"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  placeholder="Email address"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  placeholder="Phone number"
+                  name="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
               </div>
-              {/* select */}
-              <Select>
+
+              {/* Select Service */}
+              <Select
+                onValueChange={handleServiceChange}
+                value={formData.service}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select a service" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Select a service</SelectLabel>
-                    <SelectItem value="est">Back-end Development</SelectItem>
-                    <SelectItem value="cst">Front-end Development</SelectItem>
-                    <SelectItem value="mst">Fullstack Development</SelectItem>
-                  </SelectGroup>
+                  <SelectItem value="backend">Back-end Development</SelectItem>
+                  <SelectItem value="frontend">
+                    Front-end Development
+                  </SelectItem>
+                  <SelectItem value="fullstack">
+                    Fullstack Development
+                  </SelectItem>
                 </SelectContent>
               </Select>
-              {/* textarea */}
+
+              {/* Message Input */}
               <Textarea
                 className="h-[200px]"
                 placeholder="Type your message here"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
               />
-              {/* button */}
-              <Button size="md" className="max-w-40">
-                Send Message
+
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                size="md"
+                className="max-w-40"
+                disabled={loading}
+              >
+                {loading ? "Sending..." : "Send Message"}
               </Button>
+
+              {/* Success/Error Messages */}
+              {success && (
+                <p className="text-green-500">Message sent successfully!</p>
+              )}
+              {error && <p className="text-red-500">{error}</p>}
             </form>
           </div>
           {/* info */}

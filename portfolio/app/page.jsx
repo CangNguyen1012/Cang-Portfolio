@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { FiDownload } from "react-icons/fi";
 
@@ -6,21 +8,38 @@ import Socials from "@/components/Socials";
 import Photo from "@/components/Photo";
 import Stats from "@/components/Stats";
 const Home = () => {
+  const handleDownload = async () => {
+    try {
+      const response = await fetch("/Nguyen_Ba_Cang_CV.pdf"); // Fetch file from public folder
+      const blob = await response.blob(); // Convert to blob
+
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "Nguyen_Ba_Cang_CV.pdf"; // Set file name
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href); // Cleanup
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
+  };
+
   return (
     <section className="h-full">
       <div className="container mx-auto h-full">
         <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24">
           {/* text */}
           <div className="text-center xl:text-left order-2 xl:order-none">
-            <span className="text-xl">Back-end Developer</span>
+            <span className="text-xl">Web Developer</span>
             <h1 className="h1 mb-6">
               Hello I'm <br />{" "}
               <span className="text-accent">Nguyen Ba Cang (Henry)</span>
             </h1>
             <p className="max-w-[500px] mb-9 text-white/80">
-              I specialize in building fast, scalable, and secure backend
-              systems using NestJS, Node.js, and MongoDB. Passionate about clean
-              code, API development, and system optimization.
+              Passionate about designing and developing responsive,
+              high-performance web applications that prioritize usability and
+              efficiency in modern technologies.
             </p>
             {/* button and socials */}
             <div className="flex flex-col xl:flex-row items-center gap-8">
@@ -28,6 +47,7 @@ const Home = () => {
                 variant="outline"
                 size="lg"
                 className="uppercase flex items-center gap-2"
+                onClick={handleDownload} //Trigger function
               >
                 <span>Download CV</span>
                 <FiDownload className="text-xl" />

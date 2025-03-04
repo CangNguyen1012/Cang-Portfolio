@@ -22,35 +22,36 @@ import WorkSliderBtns from "@/components/ui/WorkSliderBtns";
 const projects = [
   {
     num: "01",
-    category: "backend",
-    title: "project 1",
-    description: "project 1 description",
+    category: "Fullstack",
+    title: "Drinking Ordering App",
+    description: "An app for user to order drinks from any stores",
     stack: [
-      { name: "Html 5" },
-      { name: "Css 3" },
-      { name: "Javascript" },
+      { name: "Node.js" },
+      { name: "MongoDB" },
+      { name: "Express.js" },
       { name: "React" },
-      { name: "Next.js" },
+      { name: "Vite" },
+      { name: "Tailwind CSS" },
+      { name: "Shadcn UI" },
     ],
-    image: "/dfwho2q-3ec94afc-1707-4277-9040-e9ca711de110.jpg",
-    live: "",
-    github: "",
+    image: "/drinking_app.png",
+    live: "https://drink-ordering-app-frontend.onrender.com",
+    github: "https://github.com/CangNguyen1012/Drink-Ordering-App-Frontend.git",
   },
   {
     num: "02",
     category: "frontend",
-    title: "project 2",
-    description: "project 2 description",
+    title: "Portfolio Website",
+    description: "My portfolio website",
     stack: [
-      { name: "Html 5" },
-      { name: "Css 3" },
-      { name: "Javascript" },
-      { name: "React" },
       { name: "Next.js" },
+      { name: "Tailwind CSS" },
+      { name: "Shadcn UI" },
+      { name: "JavaScript" },
     ],
-    image: "/dfwho2q-3ec94afc-1707-4277-9040-e9ca711de110.jpg",
+    image: "/portfolio.png",
     live: "",
-    github: "",
+    github: "https://github.com/CangNguyen1012/Cang-Portfolio.git",
   },
 ];
 
@@ -84,10 +85,14 @@ const Work = () => {
               <h2 className="text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500 capitalize">
                 {project.category} project
               </h2>
+              {/* project title */}
+              <h3 className="text-2xl font-semibold text-white">
+                {project.title}
+              </h3>
               {/* project description */}
               <p className="text-white/60">{project.description}</p>
               {/* project stack */}
-              <ul className="flex gap-4">
+              <ul className="flex flex-wrap gap-4">
                 {project.stack.map((item, index) => {
                   return (
                     <li key={index} className="text-xl text-accent">
@@ -103,7 +108,11 @@ const Work = () => {
               {/* project buttons */}
               <div className="flex items-center gap-4">
                 {/* Live project button */}
-                <Link href={project.live}>
+                <Link
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <TooltipProvider delayDuration={100}>
                     <Tooltip>
                       <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center group">
@@ -116,7 +125,11 @@ const Work = () => {
                   </TooltipProvider>
                 </Link>
                 {/* github project button */}
-                <Link href={project.github}>
+                <Link
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <TooltipProvider delayDuration={100}>
                     <Tooltip>
                       <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center group">
