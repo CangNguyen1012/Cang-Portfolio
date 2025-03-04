@@ -50,7 +50,7 @@ const projects = [
       { name: "JavaScript" },
     ],
     image: "/portfolio.png",
-    live: "",
+    live: "https://cang-portfolio.onrender.com",
     github: "https://github.com/CangNguyen1012/Cang-Portfolio.git",
   },
 ];
