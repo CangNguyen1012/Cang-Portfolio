@@ -53,6 +53,16 @@ const projects = [
     live: "https://cang-portfolio.onrender.com",
     github: "https://github.com/CangNguyen1012/Cang-Portfolio.git",
   },
+  {
+    num: "03",
+    category: "frontend",
+    title: "Modern Login Page",
+    description: "My login/register page",
+    stack: [{ name: "HTML 5" }, { name: "CSS 3" }, { name: "JavaScript" }],
+    image: "/Modern Login page.png",
+    live: "",
+    github: "https://github.com/CangNguyen1012/Modern-Login-Page.git",
+  },
 ];
 
 const Work = () => {
