@@ -60,7 +60,7 @@ const projects = [
     description: "My login/register page",
     stack: [{ name: "HTML 5" }, { name: "CSS 3" }, { name: "JavaScript" }],
     image: "/Modern Login page.png",
-    live: "#",
+    live: "https://cangnguyen1012.github.io/Modern-Login-Page/",
     github: "https://github.com/CangNguyen1012/Modern-Login-Page.git",
   },
 ];
